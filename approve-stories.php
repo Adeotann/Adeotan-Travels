@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Register/Sign Up</title>
+    <title>Approve Stories</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   </head>
   <body>
@@ -37,47 +37,63 @@
             </div>
         </div>
     </nav>
-    <div class="container">       
+    <!-- Main content -->
+    <div class="container">
         <div class="mt-5 mb-5 text-center">
-            <h3>Register</h3>
+            <a href="#" class="btn btn-primary" role="button">Admin Dashboard</a>            
+        </div>     
+        <div class="mt-5 mb-5 text-center">
+            <h3>Unapproved Stories</h3>
         </div>
-        <div class="col-lg-6 offset-md-3">
-            <form action="">
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Full Name</label>
-                    <input name="fullName" type="text" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Username</label>
-                    <input name="üsername" type="text" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                    <input name="ëmail" type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Password</label>
-                    <input name="password" type="password" class="form-control" id="inputPassword" placeholder="name@example.com">
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Confirm Password</label>
-                    <input name="confirmPassword" type="password" class="form-control" id="inputPassword" placeholder="name@example.com">
-                </div>
-                <div class="d-grid">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </form>
-        </div>
-              
+         <!-- Stories -->
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+          <div class="col">
+              <div class="card h-100">
+              <img src="..." class="card-img-top" alt="...">
+              <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              </div>
+              </div>
+          </div>
+          <div class="col">
+              <div class="card h-100">
+              <img src="..." class="card-img-top" alt="...">
+              <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a short card.</p>
+              </div>
+              </div>
+          </div>
+          <div class="col">
+              <div class="card h-100">
+              <img src="..." class="card-img-top" alt="...">
+              <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+              </div>
+              </div>
+          </div>
+          <div class="col">
+              <div class="card h-100">
+              <img src="..." class="card-img-top" alt="...">
+              <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              </div>
+              </div>
+          </div>
+        </div>  
+        
+           
     </div>
-
-     <!-- footer -->
-     <footer class="mt-5 navbar bg-dark navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">        
+    <!-- Main content -->
+    <!-- footer -->
+    <footer class="mt-5 navbar bg-dark navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">        
         <div class="container-fluid">
             <li class="text-center">
                 <a class="navbar-brand" href="#"><span>&copy</span> 2023 Adeotan Travels</a>                      
-            </li>
-            
+            </li>            
         </div>
     </footer>
     <!-- footer -->

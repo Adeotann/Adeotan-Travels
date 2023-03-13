@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login</title>
+    <title>Admin Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   </head>
   <body>
@@ -37,35 +37,58 @@
             </div>
         </div>
     </nav>
-    <div class="container">       
+    <!-- Main content -->
+    <div class="container">
+        <div class="mt-5 mb-5">
+            <h3>Welcome, John Doe</h3>
+        </div>
         <div class="mt-5 mb-5 text-center">
-            <h3>Login</h3>
+            <a href="#" class="btn btn-primary" role="button">Approve Stories</a>
+            <a href="#" class="btn btn-success" role="button">View Users</a>
         </div>
-        <div class="col-lg-6 offset-md-3">
-            <form action="">            
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Email Address Or Username</label>
-                    <input name="ëmail" type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Password</label>
-                    <input name="passwprd" type="password" class="form-control" id="inputPassword" placeholder="name@example.com">
-                </div>               
-                <div class="d-grid">
-                    <button type="submit" class="btn btn-primary">Login</button>
-                </div>
-            </form>
+        <div class="mt-5 mb-5 text-center">
+            <h3>Users</h3>
         </div>
-              
+         <!-- Users -->
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Username</th>
+                <th scope="col">Full Name</th>
+                <th scope="col">Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Markavelli</td>
+                <td>Mark John</td>
+                <td>mark@gmail.com</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Jacobvella</td>
+                <td>Jacob Doe</td>
+                <td>jacob@gmail.com</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>Larry Poe</td>
+                <td>larry@hotmail.com</td>
+              </tr>
+            </tbody>
+        </table>
+           
     </div>
-
+    <!-- Main content -->
     <!-- footer -->
     <footer class="mt-5 navbar bg-dark navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">        
         <div class="container-fluid">
             <li class="text-center">
                 <a class="navbar-brand" href="#"><span>&copy</span> 2023 Adeotan Travels</a>                      
-            </li>
-            
+            </li>            
         </div>
     </footer>
     <!-- footer -->

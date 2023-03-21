@@ -47,9 +47,7 @@ $userId = $_SESSION["userId"];
                     <h5 class="card-title"><?php echo htmlentities($storyTitle)?></h5>
                     <p><b>Location:</b> <?php echo htmlentities($storyLocation)?></p>
                     <p class="card-text"><?php echo htmlentities($storyDesc)?></p>
-                    <a href="my-story-details.php?id=<?php echo $storyId ;?>" class="stretched-link"></a>
-                    <a href="edit-story.php?id=<?php echo $storyId;?>" class="btn btn-primary" role="button">Edit</a>
-                    <a href="my-story-details.php?id=<?php echo $storyId ;?>" class="btn btn-warning" role="button">Details</a>
+                    <a href="my-story-details.php?id=<?php echo $storyId ;?>" class="stretched-link"></a>                    
                 </div>
                 </div>
             </div>

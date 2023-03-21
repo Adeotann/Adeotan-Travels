@@ -19,6 +19,7 @@ if(isset($_POST["submit"])){
     $Target_Image            = "uploads/story-images/".basename($image);
 
     $description             = $_POST["description"];
+    $category                = $_POST["category"];
     $author                  = $_SESSION["username"];
     $user_id                 = $_SESSION["userId"];
     $is_approved             = 0;
@@ -28,21 +29,22 @@ if(isset($_POST["submit"])){
     $currentTime=time();
     $created_at = strftime("%B-%d-%Y at %I:%M:%p",$currentTime);
   
-    if(empty($storyTitle) || empty($location) || empty($Temp_Image) || empty($description)){
+    if(empty($storyTitle) || empty($location) || empty($Temp_Image) || $category =="0" || empty($description)){
       $_SESSION["errorMessage"]= "All fields must be filled out";
       redirectTo("add-story.php");    
     }else{
       // Query to insert new story in DB When everything is fine
       global $connectingDB;
-      $sql = "INSERT INTO stories(title, location, image, description, author, user_id, is_approved, created_at)";
-      $sql .= "VALUES(:title, :location, :image, :description, :author, :user_id, :is_approved, :created_at)";
+      $sql = "INSERT INTO stories(title, location, image, description, author, user_id, category, is_approved, created_at)";
+      $sql .= "VALUES(:title, :location, :image, :description, :author, :user_id, :category, :is_approved, :created_at)";
       $stmt = $connectingDB->prepare($sql);
       $stmt->bindValue(':title', $storyTitle);      
       $stmt->bindValue(':location', $location);
       $stmt->bindValue(':image', $image);
       $stmt->bindValue(':description', $description);
       $stmt->bindValue(':author', $author);
-      $stmt->bindValue(':user_id', $user_id);
+      $stmt->bindValue(':user_id', $user_id);      
+      $stmt->bindValue(':category', $category);
       $stmt->bindValue(':is_approved', $is_approved);
       $stmt->bindValue(':created_at', $created_at);
       move_uploaded_file($Temp_Image, $Target_Image);
@@ -87,6 +89,21 @@ if(isset($_POST["submit"])){
                     <label for="exampleFormControlInput1" class="form-label">Location</label>
                     <input name="location" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Jamica">
                 </div>
+                <select name="category" class="form-select" aria-label="Default select example">
+                    <option value="0">Category</option>
+                    <?php
+                    //Fetchinng all the categories from category table
+                    global $connectingDB;
+                    $sql = "SELECT id,title FROM categories";
+                    $stmt = $connectingDB->query($sql);
+                    while ($DataRows = $stmt->fetch()) {
+                    $id = $DataRows["id"];
+                    $categoryTitle = $DataRows["title"];
+                    ?>
+                    <option value="<?php echo $categoryTitle; ?>"> <?php echo $categoryTitle; ?></option>
+                    <?php }?>
+                    
+                </select>
                 <div class="mb-3">
                     <label for="formFile" class="form-label">Photo</label>
                     <input name="image" class="form-control" type="file" id="formFile">

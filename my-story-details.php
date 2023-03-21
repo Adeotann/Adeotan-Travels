@@ -43,6 +43,11 @@ confirmLogin();
     <!-- Main content -->
     <div class="container">
         <div class="mt-5 mb-5 text-center">
+            <a href="add-story.php" class="btn btn-primary" role="button">Add Story</a>
+            <a href="my-stories.php" class="btn btn-warning" role="button">My Stories</a>
+            <a href="#" class="btn btn-success" role="button">Edit Profile</a>            
+        </div>
+        <div class="mt-5 mb-5 text-center">
             <h3>Story Details</h3>
         </div>
         <!-- Story Details -->
@@ -51,8 +56,11 @@ confirmLogin();
             <div class="card-body">
               <h5 class="card-title"><?php echo htmlentities($storyTitle)?></h5>
               <p class="card-text"><?php echo htmlentities($storyDesc)?></p>
-              <p class="card-text"><small class="text-muted">Posted by: <?php echo htmlentities($storyAuthor)?>, on <?php echo htmlentities($created_at)?></small></p>
-            </div>
+
+              <a href="edit-story.php?id=<?php echo $storyId;?>" class="btn btn-primary" role="button">Edit</a>
+              <a href="delete-my-story.php?id=<?php echo $storyId;?>" class="btn btn-danger" role="button">Delete</a>
+              <p class="card-text"><small class="text-muted">Posted by: <?php echo htmlentities($storyAuthor)?>, on <?php echo htmlentities($created_at)?></small></p>              
+            </div>            
         </div>       
            
     </div>

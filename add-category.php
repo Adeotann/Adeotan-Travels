@@ -9,7 +9,7 @@ confirmLogin();
 
 
 if(isset($_POST["submit"])){
-    $title             = $_POST["title"];
+    $title                    = $_POST["title"];
     $addedBy                  = $_SESSION["username"];
     $adminId                  = $_SESSION["userId"];
 
@@ -20,7 +20,10 @@ if(isset($_POST["submit"])){
   
     if(empty($title)){
       $_SESSION["errorMessage"]= "All fields must be filled out";
-      redirectTo("add-category.php");    
+      redirectTo("add-category.php"); 
+    }elseif (checkCategoryExistsOrNot($title)) {
+        $_SESSION["errorMessage"]= "Category Exists.!!! ";
+        redirectTo("add-category.php");
     }else{
       // Query to insert new category in DB When validation passes
       global $connectingDB;

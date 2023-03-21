@@ -43,6 +43,20 @@ function checkEmailExistsOrNot($email){
   }
 }
 
+function checkCategoryExistsOrNot($title){
+  global $connectingDB;
+  $sql    = "SELECT title FROM categories WHERE title=:title";
+  $stmt   = $connectingDB->prepare($sql);
+  $stmt->bindValue(':title',$title);
+  $stmt->execute();
+  $Result = $stmt->rowcount();
+  if ($Result==1) {
+    return true;
+  }else {
+    return false;
+  }
+}
+
 
 
 function loginAttempt($username){

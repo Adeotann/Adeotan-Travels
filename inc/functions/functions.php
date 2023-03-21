@@ -1,5 +1,20 @@
 <?php
 
+function imageNameChange($length){
+  $token = "StoryImage";
+  $codeAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+  $max = strlen($codeAlphabet);
+
+    for ($i=0; $i < $length; $i++)
+    {
+      $token .= $codeAlphabet [random_int(0, $max-1)];
+    }
+
+    return $token;
+
+}
+
 function checkUserNameExistsOrNot($username){
   global $connectingDB;
   $sql    = "SELECT username FROM users WHERE username=:userName";

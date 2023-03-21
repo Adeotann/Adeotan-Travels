@@ -35,9 +35,11 @@
                         </li> 
 
                     <?php } ?>
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="logout.php">Logout</a>
-                    </li>                                               
+                    <?php if(isset($_SESSION["userId"])){ ?>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="logout.php">Logout</a>
+                        </li>
+                    <?php }?>                                           
                 </ul>
             </div>
             </div>

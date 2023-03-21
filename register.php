@@ -15,7 +15,7 @@ if(isset($_POST["submit"])){
     $currentTime=time();
     $created_at = strftime("%B-%d-%Y at %I:%M:%p",$currentTime);
   
-    if(empty($username)||empty($password)||empty($confirmPassword)){
+    if(empty($fullname) || empty($username) || empty($email) || empty($password) || empty($confirmPassword)){
       $_SESSION["errorMessage"]= "All fields must be filled out";
       redirectTo("register.php");
     }elseif (strlen($password)<4) {
@@ -66,7 +66,7 @@ if(isset($_POST["submit"])){
         redirectTo("register.php");
       }
     }
-  } //Ending of Submit Button If-Condition
+} //Ending of Submit Button If-Condition
   
 
 

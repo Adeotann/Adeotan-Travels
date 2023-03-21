@@ -19,7 +19,7 @@ confirmLogin();
             <h3>Welcome, <?php echo $_SESSION["fullName"]?></h3>
         </div>
         <div class="mt-5 mb-5 text-center">
-            <a href="#" class="btn btn-primary" role="button">Add Story</a>
+            <a href="add-story.php" class="btn btn-primary" role="button">Add Story</a>
             <a href="#" class="btn btn-success" role="button">Edit Profile</a>
         </div>
         <div class="mt-5 mb-5 text-center">

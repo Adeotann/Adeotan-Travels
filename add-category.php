@@ -40,7 +40,7 @@ if(isset($_POST["submit"])){
         redirectTo("add-category.php");
       }
     }
-} //Ending of Submit Button If-Condition
+} //End of Submit Button If-Condition
   
 
 ?>

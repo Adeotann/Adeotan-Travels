@@ -73,3 +73,11 @@ function redirectTo($New_Location){
   header("Location:".$New_Location);
   exit;
 }
+
+function logUserOut(){
+  $_SESSION["userId"]=null;
+  $_SESSION["userName"]=null;
+  $_SESSION["fullName"]=null;
+  session_destroy();
+  redirectTo("login.php");
+}

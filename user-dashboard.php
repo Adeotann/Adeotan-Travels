@@ -7,6 +7,8 @@ require_once("inc/functions/functions.php");
 $_SESSION["TrackingURL"]=$_SERVER["PHP_SELF"];
 confirmLogin(); 
 
+$userId = $_SESSION["userId"];
+
 ?>
 
 <!-- Header Section -->
@@ -20,40 +22,40 @@ confirmLogin();
         </div>
         <div class="mt-5 mb-5 text-center">
             <a href="add-story.php" class="btn btn-primary" role="button">Add Story</a>
-            <a href="#" class="btn btn-success" role="button">Edit Profile</a>
+            <a href="my-stories.php" class="btn btn-warning" role="button">My Stories</a>
+            <a href="#" class="btn btn-success" role="button">Edit Profile</a>            
         </div>
         <div class="mt-5 mb-5 text-center">
             <h3>You have 3 Stories</h3>
         </div>
-         <!-- User Stories -->
+         <!-- User Stories -->        
         <div class="row row-cols-1 row-cols-md-3 g-4">
+            <?php
+                global $connectingDB;
+                $sql  = "SELECT * FROM stories WHERE user_id = '$userId' ORDER BY id desc";
+                $stmt = $connectingDB->query($sql);           
+                while ($DataRows = $stmt->fetch()) {
+                    $storyId        = $DataRows["id"];
+                    $storyTitle  = $DataRows["title"];
+                    $storyLocation = $DataRows["location"];
+                    $storyImage  = $DataRows["image"];
+                    $storyDesc     = $DataRows["description"];
+                    $storyAuthor     = $DataRows["author"];                
+                    
+            ?>
             <div class="col">
                 <div class="card h-100">
-                <img src="..." class="card-img-top" alt="...">
+                <img height="300" src="<?php echo htmlentities($storyImage)?>" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <h5 class="card-title"><?php echo htmlentities($storyTitle)?></h5>
+                    <p><b>Location:</b> <?php echo htmlentities($storyLocation)?></p>
+                    <p class="card-text"><?php echo htmlentities($storyDesc)?></p>
+                    <a href="my-story-details.php?id=<?php echo $storyId ;?>" class="stretched-link"></a>
+                    <a href="edit-story.php?id=<?php echo $storyId;?>" class="btn btn-primary" role="button">Edit</a>                    
                 </div>
                 </div>
             </div>
-            <div class="col">
-                <div class="card h-100">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a short card.</p>
-                </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card h-100">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-                </div>
-                </div>
-            </div>            
+            <?php }?>    
         </div> 
            
     </div>

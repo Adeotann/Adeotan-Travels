@@ -32,7 +32,7 @@ if(isset($_POST["submit"])){
       $_SESSION["errorMessage"]= "All fields must be filled out";
       redirectTo("add-story.php");    
     }else{
-      // Query to insert new admin in DB When everything is fine
+      // Query to insert new story in DB When everything is fine
       global $connectingDB;
       $sql = "INSERT INTO stories(title, location, image, description, author, user_id, is_approved, created_at)";
       $sql .= "VALUES(:title, :location, :image, :description, :author, :user_id, :is_approved, :created_at)";
@@ -64,7 +64,11 @@ if(isset($_POST["submit"])){
 <!-- Header Section -->
 
     <!-- Main content -->
-    <div class="container">       
+    <div class="container">
+        <div class="mt-5 mb-5 text-center">
+            <a href="user-dashboard.php" class="btn btn-warning" role="button">Dashboard</a>
+            <a href="#" class="btn btn-success" role="button">Edit Profile</a>            
+        </div>     
         <div class="mt-5 mb-5 text-center">
             <h3>Add Story</h3>
         </div>

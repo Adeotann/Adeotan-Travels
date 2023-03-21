@@ -23,7 +23,7 @@ if(isset($_SESSION["userId"])){
         $_SESSION["userId"]=$foundAccount["id"];
         $_SESSION["username"]=$foundAccount["username"];
         $_SESSION["fullName"]=$foundAccount["full_name"];     
-        $_SESSION["successMessage"]= "Welcome ". "<b>".$_SESSION["username"]."</b>"."!";
+        
         if (isset($_SESSION["TrackingURL"])) {
           redirectTo($_SESSION["TrackingURL"]);
         }else{

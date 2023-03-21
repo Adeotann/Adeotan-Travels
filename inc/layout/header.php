@@ -18,9 +18,11 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>                               
+                <?php if(isset($_SESSION["userId"])){ ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="user-dashboard.php">User Dashboard</a>
+                    </li>  
+                <?php }?>                             
             </ul>
             
             <div class="d-flex" role="search">

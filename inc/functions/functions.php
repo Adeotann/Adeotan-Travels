@@ -32,14 +32,14 @@ function checkEmailExistsOrNot($email){
 
 function loginAttempt($username){
   global $connectingDB;
-  $sql = "SELECT * FROM users WHERE username=:userName LIMIT 1";
+  $sql = "SELECT * FROM users WHERE email=:userName OR username =:userName LIMIT 1";
   $stmt = $connectingDB->prepare($sql);
   $stmt->bindValue(':userName',$username);
   // $stmt->bindValue(':PassworD',$hash);
   $stmt->execute();
-  $Result = $stmt->rowcount();
-  if ($Result == 1) {
-    return $Found_Account=$stmt->fetch();
+  $result = $stmt->rowcount();
+  if ($result == 1) {
+    return $foundAccount = $stmt->fetch();
   }else {
     return null;
   }
@@ -50,7 +50,7 @@ function confirmLogin(){
     return true;
     }  else {
     $_SESSION["ErrorMessage"]="Login Required !";
-    Redirect_to("login.php");
+    redirectTo("login.php");
     }
 }
 

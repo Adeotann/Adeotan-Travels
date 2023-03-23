@@ -21,17 +21,16 @@ if($_SESSION["isAdmin"] == 0){
     <!-- Main content -->
     <div class="container">
         <div class="mt-5 mb-5 text-center">
-            <a href="admin-dashboard.php" class="btn btn-primary" role="button">Admin Dashboard</a>
-            <a href="approved-stories-list.php" class="btn btn-warning" role="button">Approved Stories</a>            
+            <a href="admin-dashboard.php" class="btn btn-primary" role="button">Admin Dashboard</a>            
         </div>     
         <div class="mt-5 mb-5 text-center">
-            <h3>Unapproved Stories</h3>
+            <h3>Approved Stories</h3>
         </div>
          <!-- Stories -->
         <div class="row row-cols-1 row-cols-md-3 g-4">
         <?php
             global $connectingDB;
-            $sql  = "SELECT * FROM stories WHERE is_approved = 0 ORDER BY id desc";
+            $sql  = "SELECT * FROM stories WHERE is_approved = 1 ORDER BY id desc";
             $stmt = $connectingDB->query($sql);
             $Sr = 0;
             while ($DataRows = $stmt->fetch()) {

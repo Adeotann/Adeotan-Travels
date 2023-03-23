@@ -57,6 +57,20 @@ function checkCategoryExistsOrNot($title){
   }
 }
 
+function checkLocationExistsOrNot($location){
+  global $connectingDB;
+  $sql    = "SELECT location FROM locations WHERE location=:location";
+  $stmt   = $connectingDB->prepare($sql);
+  $stmt->bindValue(':location',$location);
+  $stmt->execute();
+  $Result = $stmt->rowcount();
+  if ($Result==1) {
+    return true;
+  }else {
+    return false;
+  }
+}
+
 
 
 function loginAttempt($username){

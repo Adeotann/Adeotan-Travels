@@ -12,39 +12,37 @@ if($_SESSION["isAdmin"] == 0){
 }
 
 if(isset($_POST["submit"])){
-    $title                    = $_POST["title"];
+    $location                    = $_POST["location"];
     $addedBy                  = $_SESSION["username"];
-    $adminId                  = $_SESSION["userId"];
 
     // Put current date and time into the created_at Column
     date_default_timezone_set("Africa/Lagos");
     $currentTime=time();
     $created_at = strftime("%B-%d-%Y at %I:%M:%p",$currentTime);
   
-    if(empty($title)){
+    if(empty($location)){
       $_SESSION["errorMessage"]= "All fields must be filled out";
-      redirectTo("add-category.php"); 
-    }elseif (checkCategoryExistsOrNot($title)) {
-        $_SESSION["errorMessage"]= "Category Exists.!!! ";
-        redirectTo("add-category.php");
+      redirectTo("add-location.php"); 
+    }elseif (checkLocationExistsOrNot($location)) {
+        $_SESSION["errorMessage"]= "Location Exists.!!! ";
+        redirectTo("add-location.php");
     }else{
       // Query to insert new category in DB When validation passes
       global $connectingDB;
-      $sql = "INSERT INTO categories(title, added_by, admin_id, created_at)";
-      $sql .= "VALUES(:title, :added_by, :admin_id, :created_at)";
+      $sql = "INSERT INTO locations(location, added_by, created_at)";
+      $sql .= "VALUES(:location, :added_by, :created_at)";
       $stmt = $connectingDB->prepare($sql);
-      $stmt->bindValue(':title', $title);      
-      $stmt->bindValue(':added_by', $addedBy);
-      $stmt->bindValue(':admin_id', $adminId);
+      $stmt->bindValue(':location', $location);      
+      $stmt->bindValue(':added_by', $addedBy);      
       $stmt->bindValue(':created_at', $created_at);
       
       $execute = $stmt->execute();      
       if($execute){
-        $_SESSION["successMessage"]="Your Category was added successfully";
-        redirectTo("add-category.php");      
+        $_SESSION["successMessage"]="Your Location was added successfully";
+        redirectTo("add-location.php");
       }else {
         $_SESSION["errorMessage"]= "Something went wrong. Try Again !";
-        redirectTo("add-category.php");
+        redirectTo("add-location.php");
       }
     }
 } //End of Submit Button If-Condition
@@ -70,13 +68,13 @@ if(isset($_POST["submit"])){
                     echo successMessage();
                     echo errorMessageForRg();
                 ?>
-            <form action="add-category.php" method="POST" enctype="multipart/form-data">
+            <form action="add-location.php" method="POST" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Category Title</label>
-                    <input name="title" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Category Title">
+                    <input name="location" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Category Title">
                 </div>                       
                 <div class="d-grid">
-                    <button name="submit" type="submit" class="btn btn-primary">Add Category</button>
+                    <button name="submit" type="submit" class="btn btn-primary">Add Location</button>
                 </div>
             </form>
         </div>

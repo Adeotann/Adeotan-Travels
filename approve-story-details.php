@@ -5,31 +5,27 @@ require_once("inc/sessions/sessions.php");
 require_once("inc/functions/functions.php");
 
 $_SESSION["TrackingURL"]=$_SERVER["PHP_SELF"];
-confirmLogin(); 
+confirmLogin();
 
-        $userId = $_SESSION["userId"];
+if($_SESSION["isAdmin"] == 0){ 
+  logUserOut();
+}  
+
 
         $queryParameter = $_GET["id"];
         global $connectingDB;
-        $sql ="SELECT * FROM stories WHERE id = '$queryParameter' AND user_id = '$userId' ";
+        $sql ="SELECT * FROM stories WHERE id='$queryParameter'";
         $stmt = $connectingDB->query($sql);
         $DataRows = $stmt->fetch();
         
         $storyId        = $DataRows["id"];
-        $storyUserId   = $DataRows['user_id'];
         $storyTitle  = $DataRows["title"];
         $storyLocation = $DataRows["location"];
         $storyImage  = $DataRows["image"];
         $storyDesc     = $DataRows["description"];
         $storyAuthor     = $DataRows["author"]; 
-        $created_at     = $DataRows["created_at"];     
-        
-        
-    if ($userId !== $storyUserId){
-        
-        logUserOut();
-        
-    }
+        $is_approved     = $DataRows["is_approved"]; 
+        $created_at     = $DataRows["created_at"];      
   
 
 ?>
@@ -41,11 +37,6 @@ confirmLogin();
     <!-- Main content -->
     <div class="container">
         <div class="mt-5 mb-5 text-center">
-            <a href="add-story.php" class="btn btn-primary" role="button">Add Story</a>
-            <a href="my-stories.php" class="btn btn-warning" role="button">My Stories</a>
-            <a href="#" class="btn btn-success" role="button">Edit Profile</a>            
-        </div>
-        <div class="mt-5 mb-5 text-center">
             <h3>Story Details</h3>
         </div>
         <!-- Story Details -->
@@ -54,11 +45,13 @@ confirmLogin();
             <div class="card-body">
               <h5 class="card-title"><?php echo htmlentities($storyTitle)?></h5>
               <p class="card-text"><?php echo htmlentities($storyDesc)?></p>
-
-              <a href="edit-story.php?id=<?php echo $storyId;?>" class="btn btn-primary" role="button">Edit</a>
-              <a href="delete-my-story.php?id=<?php echo $storyId;?>" class="btn btn-danger" role="button">Delete</a>
-              <p class="card-text"><small class="text-muted">Posted by: <?php echo htmlentities($storyAuthor)?>, on <?php echo htmlentities($created_at)?></small></p>              
-            </div>            
+              <p class="card-text"><small class="text-muted">Posted by: <?php echo htmlentities($storyAuthor)?>, on <?php echo htmlentities($created_at)?></small></p>
+              <?php if ($is_approved == 0){ ?>
+                <a href="story-approved.php?id=<?php echo $storyId;?>" class="btn btn-primary" role="button">Approve Story</a>
+              <?php }elseif($is_approved == 1){?>
+                <a href="story-disapproved.php?id=<?php echo $storyId;?>" class="btn btn-primary" role="button">Disapprove Story</a>
+              <?php }?>
+            </div>
         </div>       
            
     </div>

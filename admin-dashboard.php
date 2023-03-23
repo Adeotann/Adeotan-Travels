@@ -4,7 +4,14 @@ require_once("inc/db/db_connection.php");
 require_once("inc/sessions/sessions.php");
 require_once("inc/functions/functions.php");
 
+$_SESSION["TrackingURL"]=$_SERVER["PHP_SELF"];
+confirmLogin();
 
+if($_SESSION["isAdmin"] == 0){ 
+  logUserOut();
+}
+
+$adminUserId = $_SESSION["userId"];
 
 ?>
 
@@ -15,11 +22,12 @@ require_once("inc/functions/functions.php");
     <!-- Main content -->
     <div class="container">
         <div class="mt-5 mb-5">
-            <h3>Welcome, John Doe</h3>
+            <h3>Welcome, <?php echo $_SESSION["fullName"]?></h3>
         </div>
         <div class="mt-5 mb-5 text-center">
-            <a href="#" class="btn btn-primary" role="button">Approve Stories</a>
-            <a href="#" class="btn btn-success" role="button">View Users</a>
+            <a href="approve-stories.php" class="btn btn-primary" role="button">Approve Stories</a>
+            <a href="add-category.php" class="btn btn-success" role="button">Add Category</a>
+            <a href="add-location.php" class="btn btn-dark" role="button">Add Location</a>
         </div>
         <div class="mt-5 mb-5 text-center">
             <h3>Users</h3>
@@ -32,27 +40,38 @@ require_once("inc/functions/functions.php");
                 <th scope="col">Username</th>
                 <th scope="col">Full Name</th>
                 <th scope="col">Email</th>
+                <th scope="col">Admin</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Markavelli</td>
-                <td>Mark John</td>
-                <td>mark@gmail.com</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacobvella</td>
-                <td>Jacob Doe</td>
-                <td>jacob@gmail.com</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>Larry Poe</td>
-                <td>larry@hotmail.com</td>
-              </tr>
+            
+            <tbody>            
+              <?php
+                global $connectingDB;
+                $sql = "SELECT * FROM users ORDER BY id asc";
+                $execute =$connectingDB->query($sql);
+                $SrNo = 0;
+                while ($DataRows=$execute->fetch()) {
+                $userId        = $DataRows["id"];              
+                $username     = $DataRows["username"];
+                $fullName      = $DataRows["full_name"];
+                $email        = $DataRows["email"];
+                $isAdmin        = $DataRows["is_admin"];
+                $SrNo++;
+              ?>
+                <?php if($userId !== $adminUserId){ ?>
+                  <tr>
+                    <th scope="row"></th>
+                    <td><?php echo htmlentities($username)?></td>
+                    <td><?php echo htmlentities($fullName)?></td>
+                    <td><?php echo htmlentities($email)?></td>
+                    <?php if($isAdmin){?>
+                      <td><button href="#" class="btn btn-sm btn-danger" role="button">Yes</button></td>
+                    <?php }else{?>
+                      <td><button href="#" class="btn btn-sm btn-dark" role="button">No</button></td>
+                    <?php }?>
+                  </tr>
+                <?php }?>
+             <?php }?>
             </tbody>
         </table>
            

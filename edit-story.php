@@ -55,9 +55,9 @@ if(isset($_POST["edit"])){
       //if the image iput is empty, update the row with the existing image, 
       //else, UPDATE the row with the new image
         if(empty($Temp_Image)){
-            $sql = "UPDATE stories SET title = '$storyTitle', location = '$location', description = '$description' WHERE id = '$queryParameter' AND WHERE user_id ='$userId' ";
+            $sql = "UPDATE stories SET title = '$storyTitle', location = '$location', description = '$description' WHERE id = '$queryParameter' AND user_id ='$userId' ";
         }else{
-            $sql = "UPDATE stories SET title = '$storyTitle', location = '$location', image = '$image', description = '$description' WHERE id = '$queryParameter' ";
+            $sql = "UPDATE stories SET title = '$storyTitle', location = '$location', image = '$image', description = '$description' WHERE id = '$queryParameter' AND user_id ='$userId'  ";
             move_uploaded_file($Temp_Image, $Target_Image);
         }
       $execute=$connectingDB->query($sql);     

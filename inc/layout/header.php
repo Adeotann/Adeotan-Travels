@@ -9,7 +9,7 @@
   <body>
     <nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Adeotan Travels</a>
+            <a class="navbar-brand" href="index.php">Adeotan Travels</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="text-light navbar-toggler-icon"></span>
             </button>
@@ -22,20 +22,23 @@
                     <li class="nav-item">
                         <a class="nav-link" href="user-dashboard.php">User Dashboard</a>
                     </li>  
-                <?php }?>                             
+                <?php }?>
+                <?php if($_SESSION["isAdmin"]){ ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="admin-dashboard.php">Admin Dashboard</a>
+                    </li>  
+                <?php }?>                           
             </ul>
             
             <div class="d-flex" role="search">
                 <ul class="navbar-nav me-auto d-flex mb-2 mb-lg-0">
                     <?php if(!isset($_SESSION["userId"])){ ?>
-
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="register.php">Register</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="login.php">Login</a>
                         </li> 
-
                     <?php } ?>
                     <?php if(isset($_SESSION["userId"])){ ?>
                         <li class="nav-item">

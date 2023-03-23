@@ -29,7 +29,7 @@ if(isset($_POST["submit"])){
     $currentTime=time();
     $created_at = strftime("%B-%d-%Y at %I:%M:%p",$currentTime);
   
-    if(empty($storyTitle) || empty($location) || empty($Temp_Image) || $category =="0" || empty($description)){
+    if(empty($storyTitle) || empty($location) || empty($Temp_Image) || $category =="0" || $location =="0" || empty($description)){
       $_SESSION["errorMessage"]= "All fields must be filled out";
       redirectTo("add-story.php");    
     }else{
@@ -86,24 +86,38 @@ if(isset($_POST["submit"])){
                     <input name="storyTitle" type="text" class="form-control" id="exampleFormControlInput1" placeholder="A Trip To Jamica">
                 </div>
                 <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Location</label>
-                    <input name="location" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Jamica">
+                    <select name="location" class="form-select" aria-label="Default select example">
+                        <option value="0">Location</option>
+                        <?php
+                        //Fetchinng all the categories from category table
+                        global $connectingDB;
+                        $sql = "SELECT id,location FROM locations ORDER BY location";
+                        $stmt = $connectingDB->query($sql);
+                        while ($DataRows = $stmt->fetch()) {
+                        $id = $DataRows["id"];
+                        $locationTitle = $DataRows["location"];
+                        ?>
+                        <option value="<?php echo $locationTitle; ?>"> <?php echo $locationTitle; ?></option>
+                        <?php }?>                    
+                    </select>
                 </div>
-                <select name="category" class="form-select" aria-label="Default select example">
-                    <option value="0">Category</option>
-                    <?php
-                    //Fetchinng all the categories from category table
-                    global $connectingDB;
-                    $sql = "SELECT id,title FROM categories";
-                    $stmt = $connectingDB->query($sql);
-                    while ($DataRows = $stmt->fetch()) {
-                    $id = $DataRows["id"];
-                    $categoryTitle = $DataRows["title"];
-                    ?>
-                    <option value="<?php echo $categoryTitle; ?>"> <?php echo $categoryTitle; ?></option>
-                    <?php }?>
-                    
-                </select>
+                <div class="mb-3">
+                    <select name="category" class="form-select" aria-label="Default select example">
+                        <option value="0">Category</option>
+                        <?php
+                        //Fetchinng all the categories from category table
+                        global $connectingDB;
+                        $sql = "SELECT id,title FROM categories ORDER BY title";
+                        $stmt = $connectingDB->query($sql);
+                        while ($DataRows = $stmt->fetch()) {
+                        $id = $DataRows["id"];
+                        $categoryTitle = $DataRows["title"];
+                        ?>
+                        <option value="<?php echo $categoryTitle; ?>"> <?php echo $categoryTitle; ?></option>
+                        <?php }?>
+                        
+                    </select>
+                </div>
                 <div class="mb-3">
                     <label for="formFile" class="form-label">Photo</label>
                     <input name="image" class="form-control" type="file" id="formFile">

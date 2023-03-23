@@ -22,7 +22,8 @@ if(isset($_SESSION["userId"])){
   
         $_SESSION["userId"]=$foundAccount["id"];
         $_SESSION["username"]=$foundAccount["username"];
-        $_SESSION["fullName"]=$foundAccount["full_name"];     
+        $_SESSION["fullName"]=$foundAccount["full_name"];
+        $_SESSION["isAdmin"]=$foundAccount["is_admin"];     
         
         if (isset($_SESSION["TrackingURL"])) {
           redirectTo($_SESSION["TrackingURL"]);

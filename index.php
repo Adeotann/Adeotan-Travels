@@ -24,7 +24,7 @@ require_once("inc/functions/functions.php");
         <div class="row row-cols-1 row-cols-md-3 g-4">
             <?php
                 global $connectingDB;
-                $sql  = "SELECT * FROM stories ORDER BY id desc";
+                $sql  = "SELECT * FROM stories WHERE is_approved = 1 ORDER BY id desc";
                 $stmt = $connectingDB->query($sql);
                 $Sr = 0;
                 while ($DataRows = $stmt->fetch()) {
@@ -42,8 +42,8 @@ require_once("inc/functions/functions.php");
                 <div class="card-body">
                     <h5 class="card-title"><?php echo htmlentities($storyTitle)?></h5>
                     <p><b>Location:</b> <?php echo htmlentities($storyLocation)?></p>
-                    <p class="card-text"><?php echo htmlentities($storyDesc)?></p>
-                    <a href="story-details.php?id=<?php echo $storyId ;?>" class="btn btn-warning" role="button">Details</a>
+                    <p class="card-text"><?php echo htmlentities($storyDesc)?></p>                    
+                    <a href="story-details.php?id=<?php echo $storyId ;?>" class="stretched-link"></a>                    
                 </div>
                 </div>
             </div>

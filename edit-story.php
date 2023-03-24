@@ -79,7 +79,7 @@ if(isset($_POST["edit"])){
 <!-- Header Section -->
 
     <!-- Main content -->
-    <div class="container">  
+    <div class="container give-min-height">  
         <div class="mt-5 mb-5 text-center">
             <a href="add-story.php" class="btn btn-primary" role="button">Add Story</a>
             <a href="user-dashboard.php" class="btn btn-warning" role="button">Dashboard</a>

@@ -16,14 +16,13 @@ $userId = $_SESSION["userId"];
 <!-- Header Section -->
 
     <!-- Main content -->
-    <div class="container">
+    <div class="container give-min-height">
         <div class="mt-5 mb-5">
             <h3>Welcome, <?php echo $_SESSION["fullName"]?></h3>
         </div>
         <div class="mt-5 mb-5 text-center">
             <a href="add-story.php" class="btn btn-primary" role="button">Add Story</a>
-            <a href="my-stories.php" class="btn btn-warning" role="button">My Stories</a>
-            <a href="#" class="btn btn-success" role="button">Edit Profile</a>            
+            <a href="my-stories.php" class="btn btn-warning" role="button">My Stories</a>                        
         </div>
         <div class="mt-5 mb-5 text-center">
             <h3>You have 3 Stories</h3>
@@ -40,7 +39,8 @@ $userId = $_SESSION["userId"];
                     $storyLocation = $DataRows["location"];
                     $storyImage  = $DataRows["image"];
                     $storyDesc     = $DataRows["description"];
-                    $storyAuthor     = $DataRows["author"];                
+                    $storyAuthor     = $DataRows["author"];
+                    $isApproved     = $DataRows["is_approved"];                
                     
             ?>
             <div class="col">
@@ -50,7 +50,14 @@ $userId = $_SESSION["userId"];
                     <h5 class="card-title"><?php echo htmlentities($storyTitle)?></h5>
                     <p><b>Location:</b> <?php echo htmlentities($storyLocation)?></p>
                     <p class="card-text"><?php echo htmlentities($storyDesc)?></p>
-                    <a href="my-story-details.php?id=<?php echo $storyId ;?>" class="stretched-link"></a>                    
+                    <a href="my-story-details.php?id=<?php echo $storyId ;?>" class="stretched-link"></a>
+                    <!-- Approved Notification -->
+                    <?php if($isApproved ==1){?>
+                        <button type="button" class="btn btn-sm btn-success" disabled>Approved</button>
+                    <?php }elseif($isApproved == 0){?>
+                        <button type="button" class="btn btn-sm btn-secondary" disabled>Unapproved</button>
+                    <?php }?>
+                    <!-- Approved Notification -->
                 </div>
                 </div>
             </div>

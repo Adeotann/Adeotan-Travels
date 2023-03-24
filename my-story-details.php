@@ -19,6 +19,7 @@ confirmLogin();
         $storyUserId   = $DataRows['user_id'];
         $storyTitle  = $DataRows["title"];
         $storyLocation = $DataRows["location"];
+        $storyCategory = $DataRows["category"];
         $storyImage  = $DataRows["image"];
         $storyDesc     = $DataRows["description"];
         $storyAuthor     = $DataRows["author"]; 
@@ -39,11 +40,10 @@ confirmLogin();
 <!-- Header Section -->
 
     <!-- Main content -->
-    <div class="container">
+    <div class="container give-min-height">
         <div class="mt-5 mb-5 text-center">
             <a href="add-story.php" class="btn btn-primary" role="button">Add Story</a>
-            <a href="my-stories.php" class="btn btn-warning" role="button">My Stories</a>
-            <a href="#" class="btn btn-success" role="button">Edit Profile</a>            
+            <a href="my-stories.php" class="btn btn-warning" role="button">My Stories</a>                       
         </div>
         <div class="mt-5 mb-5 text-center">
             <h3>Story Details</h3>
@@ -53,6 +53,8 @@ confirmLogin();
             <img height="400" src="<?php echo htmlentities($storyImage)?>" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title"><?php echo htmlentities($storyTitle)?></h5>
+              <p><b>Location:</b> <?php echo htmlentities($storyLocation)?></p>
+              <p><b>Category:</b> <?php echo htmlentities($storyCategory)?></p>
               <p class="card-text"><?php echo htmlentities($storyDesc)?></p>
 
               <a href="edit-story.php?id=<?php echo $storyId;?>" class="btn btn-primary" role="button">Edit</a>

@@ -20,7 +20,7 @@ $adminUserId = $_SESSION["userId"];
 <!-- Header Section -->
 
     <!-- Main content -->
-    <div class="container">
+    <div class="container give-min-height">
         <div class="mt-5 mb-5">
             <h3>Welcome, <?php echo $_SESSION["fullName"]?></h3>
         </div>

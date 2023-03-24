@@ -57,9 +57,9 @@ if(isset($_POST["submit"])){
 <!-- Header Section -->
 
     <!-- Main content -->
-    <div class="container">
+    <div class="container give-min-height">
         <div class="mt-5 mb-5 text-center">
-            <a href="user-dashboard.php" class="btn btn-warning" role="button">Dashboard</a>                        
+            <a href="admin-dashboard.php" class="btn btn-warning" role="button">Admin Dashboard</a>                        
         </div>     
         <div class="mt-5 mb-5 text-center">
             <h3>Add Category</h3>

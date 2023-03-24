@@ -77,7 +77,7 @@ if(isset($_POST["submit"])){
 <!-- Header Section -->
 
     <!-- Main content -->
-    <div class="container">       
+    <div class="container give-min-height">       
         <div class="mt-5 mb-5 text-center">
             <h3>Register</h3>
         </div>

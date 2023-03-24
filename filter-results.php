@@ -11,12 +11,7 @@ require_once("inc/functions/functions.php");
 <!-- Header Section -->
 
     <!-- Main content -->
-    <div class="container give-min-height">
-        <!-- H1 Text -->
-        <div class="mt-5 text-center">
-            <h1>Welcome To Adeotan Travels!</h1>
-            <h5>Your number one travel story website.</h5>
-        </div>
+    <div class="container give-min-height">                
         <div class="mt-5 text-center">
             <h3>Stories</h3>
         </div>
@@ -25,7 +20,7 @@ require_once("inc/functions/functions.php");
                 <div class="row">
                     <div class="col-md-3 mt-1">                        
                         <select name="filter_category" class="form-select" aria-label="Default select example">
-                            <option value="0">Category</option>
+                            <option value="0">All Stories</option>
                             <?php
                             //Fetchinng all the categories from category table
                             global $connectingDB;
@@ -40,7 +35,7 @@ require_once("inc/functions/functions.php");
                         </select>
                     </div>                                                 
                     <div class="col-md-1 mt-1">
-                        <button type="submit" class="btn btn-primary">Filter</button>
+                        <button name="filter" type="submit" class="btn btn-primary">Filter</button>
                     </div>
                 </div>
             </form>
@@ -48,8 +43,13 @@ require_once("inc/functions/functions.php");
         <!-- Users Stories -->
         <div class="row row-cols-1 row-cols-md-3 g-4">
             <?php
+                $getCategory = $_GET['filter_category'];
                 global $connectingDB;
-                $sql  = "SELECT * FROM stories WHERE is_approved = 1 ORDER BY id desc LIMIT 3";
+                if($getCategory == "0"){
+                    $sql  = "SELECT * FROM stories WHERE is_approved = 1 ORDER BY id desc";
+                }else{
+                    $sql  = "SELECT * FROM stories WHERE  category = '$getCategory' AND is_approved = 1 ORDER BY id desc";
+                }                
                 $stmt = $connectingDB->query($sql);
                 $Sr = 0;
                 while ($DataRows = $stmt->fetch()) {

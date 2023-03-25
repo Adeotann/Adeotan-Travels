@@ -51,8 +51,7 @@ if(isset($_SESSION["userId"])){
         <div class="col-lg-6 offset-md-3">
                 <?php
                     echo errorMessage();
-                    echo successMessage();
-                    echo errorMessageForRg();
+                    echo successMessage();                  
                 ?>
             <form action="login.php" method="POST">            
                 <div class="mb-3">

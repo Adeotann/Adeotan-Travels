@@ -91,8 +91,7 @@ if(isset($_POST["edit"])){
         <div class="col-lg-6 offset-md-3">
                 <?php
                     echo errorMessage();
-                    echo successMessage();
-                    echo errorMessageForRg();
+                    echo successMessage();                   
                 ?>
             <form action="edit-story.php?id=<?php echo $queryParameter; ?>" method="POST" enctype="multipart/form-data">
                 <div class="mb-3">

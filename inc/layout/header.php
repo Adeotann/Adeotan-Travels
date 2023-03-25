@@ -10,7 +10,13 @@
         {
             min-height:500px;
         }
-    </style>  
+    </style>
+    
+    <script>
+        setTimeout(function(){
+            document.querySelector('.dispDiv').remove();
+        }, 4000);
+    </script>
 
 </head>
   <body>

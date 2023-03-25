@@ -76,8 +76,7 @@ if(isset($_POST["submit"])){
         <div class="col-lg-6 offset-md-3">
                 <?php
                     echo errorMessage();
-                    echo successMessage();
-                    echo errorMessageForRg();
+                    echo successMessage();                    
                 ?>
             <form action="add-story.php" method="POST" enctype="multipart/form-data">
                 <div class="mb-3">

@@ -109,3 +109,12 @@ function logUserOut(){
   session_destroy();
   redirectTo("login.php");
 }
+
+function myTotalUserStories($userId){
+  global $connectingDB;
+  $sql = "SELECT COUNT(*) FROM stories WHERE user_id = '$userId'";
+  $stmt = $connectingDB->query($sql);
+  $totalRows= $stmt->fetch();
+  $totaluserStories=array_shift($totalRows);
+  echo $totaluserStories;
+}

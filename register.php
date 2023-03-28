@@ -3,6 +3,8 @@ require_once("inc/db/db_connection.php");
 require_once("inc/sessions/sessions.php");
 require_once("inc/functions/functions.php");
 
+$pageTitle = 'Register/Signup';
+
 if(isset($_POST["submit"])){
     $fullname                 = $_POST["fullname"];
     $username                = $_POST["username"];
@@ -15,11 +17,12 @@ if(isset($_POST["submit"])){
     $currentTime=time();
     $created_at = strftime("%B-%d-%Y at %I:%M:%p",$currentTime);
   
+    //Check if inputs are empty
     if(empty($fullname) || empty($username) || empty($email) || empty($password) || empty($confirmPassword)){
       $_SESSION["errorMessage"]= "All fields must be filled out";
       redirectTo("register.php");
-    }elseif (strlen($password)<4) {
-      $_SESSION["errorMessage"]= "Password should be greater than 3 characters";
+    }elseif (strlen($password)<5) {
+      $_SESSION["errorMessage"]= "Password should be greater than 5 characters";
       redirectTo("register.php");
     }elseif ($password !== $confirmPassword) {
       $_SESSION["errorMessage"]= "Password and Confirm Password should match";
@@ -31,7 +34,7 @@ if(isset($_POST["submit"])){
       $_SESSION["errorMessage"]= "Email Exists. Try Another One! ";
       redirectTo("register.php");      
     }else{
-      // Query to insert new admin in DB When everything is fine
+      // Query to insert new user into the DB if validation passes
       global $connectingDB;
       $sql = "INSERT INTO users(full_name, username, email, password, is_admin, created_at)";
       $sql .= "VALUES(:full_name, :username, :email, :password, :is_admin, :created_at)";
@@ -44,16 +47,15 @@ if(isset($_POST["submit"])){
       $stmt->bindValue(':created_at', $created_at);
       $execute = $stmt->execute();      
       if($execute){
-
-        $_SESSION["successMessage"]="Your Sign Up was successful";
-
+        
         $foundAccount=loginAttempt($username);
         if ($foundAccount && password_verify($_POST["password"], $foundAccount["password"])) {
     
             $_SESSION["userId"]=$foundAccount["id"];
             $_SESSION["username"]=$foundAccount["username"];
-            $_SESSION["fullName"]=$foundAccount["full_name"];     
-            $_SESSION["successMessage"]= "Welcome " .$_SESSION["username"]."!";
+            $_SESSION["fullName"]=$foundAccount["full_name"];
+            $_SESSION["isAdmin"]=$foundAccount["is_admin"];    
+            
             if (isset($_SESSION["TrackingURL"])) {
               redirectTo($_SESSION["TrackingURL"]);            
             }else{

@@ -4,6 +4,8 @@ require_once("inc/db/db_connection.php");
 require_once("inc/sessions/sessions.php");
 require_once("inc/functions/functions.php");
 
+$pageTitle = 'Add Location';
+
 $_SESSION["TrackingURL"]=$_SERVER["PHP_SELF"];
 confirmLogin(); 
 
@@ -57,10 +59,11 @@ if(isset($_POST["submit"])){
     <!-- Main content -->
     <div class="container give-min-height">
         <div class="mt-5 mb-5 text-center">
-            <a href="admin-dashboard.php" class="btn btn-warning" role="button">Admin Dashboard</a>                        
+            <a href="admin-dashboard.php" class="btn btn-warning" role="button">Admin Dashboard</a>   
+            <a href="view-locations.php" class="btn btn-dark" role="button">View Locations</a>                        
         </div>     
         <div class="mt-5 mb-5 text-center">
-            <h3>Add Category</h3>
+            <h3>Add Location</h3>
         </div>
         <div class="col-lg-6 offset-md-3">
                 <?php
@@ -69,8 +72,8 @@ if(isset($_POST["submit"])){
                 ?>
             <form action="add-location.php" method="POST" enctype="multipart/form-data">
                 <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Category Title</label>
-                    <input name="location" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Category Title">
+                    <label for="exampleFormControlInput1" class="form-label">Location Title</label>
+                    <input name="location" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Location Title">
                 </div>                       
                 <div class="d-grid">
                     <button name="submit" type="submit" class="btn btn-primary">Add Location</button>

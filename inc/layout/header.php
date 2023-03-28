@@ -3,12 +3,12 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Register/Sign Up</title>
+    <title><?php echo $pageTitle?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <style>
         .give-min-height
         {
-            min-height:500px;
+            min-height:600px;
         }
     </style>
     
@@ -36,7 +36,7 @@
                         <a class="nav-link" href="user-dashboard.php">User Dashboard</a>
                     </li>  
                 <?php }?>
-                <?php if($_SESSION["isAdmin"]){ ?>
+                <?php if(isset($_SESSION["isAdmin"]) && $_SESSION["isAdmin"] ==1 ){ ?>
                     <li class="nav-item">
                         <a class="nav-link" href="admin-dashboard.php">Admin Dashboard</a>
                     </li>  

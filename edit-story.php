@@ -4,6 +4,8 @@ require_once("inc/db/db_connection.php");
 require_once("inc/sessions/sessions.php");
 require_once("inc/functions/functions.php");
 
+$pageTitle = 'Edit Story';
+
 $_SESSION["TrackingURL"]=$_SERVER["PHP_SELF"];
 confirmLogin(); 
 
@@ -21,6 +23,7 @@ confirmLogin();
         $getStoryUserId   = $DataRows['user_id'];
         $getStoryTitle  = $DataRows["title"];
         $getStoryLocation = $DataRows["location"];
+        $getStoryCategory = $DataRows["category"];
         $getStoryImage  = $DataRows["image"];
         $getStoryDesc     = $DataRows["description"];
         $getStoryAuthor     = $DataRows["author"]; 
@@ -36,6 +39,7 @@ confirmLogin();
 if(isset($_POST["edit"])){
     $storyTitle              = $_POST["storyTitle"];
     $location                = $_POST["location"];
+    $category                = $_POST["category"];
     $image                = $_POST["image"];
     $randImgNameGen          = imageNameChange(20);
     $image                   = "uploads/story-images/".$randImgNameGen .'.jpg';
@@ -55,9 +59,9 @@ if(isset($_POST["edit"])){
       //if the image iput is empty, update the row with the existing image, 
       //else, UPDATE the row with the new image
         if(empty($Temp_Image)){
-            $sql = "UPDATE stories SET title = '$storyTitle', location = '$location', description = '$description' WHERE id = '$queryParameter' AND user_id ='$userId' ";
+            $sql = "UPDATE stories SET title = '$storyTitle', location = '$location', category = '$category', description = '$description' WHERE id = '$queryParameter' AND user_id ='$userId' ";
         }else{
-            $sql = "UPDATE stories SET title = '$storyTitle', location = '$location', image = '$image', description = '$description' WHERE id = '$queryParameter' AND user_id ='$userId'  ";
+            $sql = "UPDATE stories SET title = '$storyTitle', location = '$location', category = '$category', image = '$image', description = '$description' WHERE id = '$queryParameter' AND user_id ='$userId'  ";
             move_uploaded_file($Temp_Image, $Target_Image);
         }
       $execute=$connectingDB->query($sql);     
@@ -99,8 +103,39 @@ if(isset($_POST["edit"])){
                     <input name="storyTitle" type="text" class="form-control" id="exampleFormControlInput1" value="<?php echo htmlentities($getStoryTitle); ?>">
                 </div>
                 <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Location</label>
-                    <input name="location" type="text" class="form-control" id="exampleFormControlInput1" value="<?php echo htmlentities($getStoryLocation); ?>">
+                    <label for="exampleFormControlInput1" class="form-label">Story Location</label>
+                    <select name="location" class="form-select" aria-label="Default select example">
+                        <option value="<?php echo htmlentities($getStoryLocation)?>"><?php echo htmlentities($getStoryLocation)?></option>
+                        <?php
+                        //Fetchinng all the categories from category table
+                        global $connectingDB;
+                        $sql = "SELECT id,location FROM locations ORDER BY location";
+                        $stmt = $connectingDB->query($sql);
+                        while ($DataRows = $stmt->fetch()) {
+                        $id = $DataRows["id"];
+                        $locationTitle = $DataRows["location"];
+                        ?>
+                        <option value="<?php echo $locationTitle; ?>"> <?php echo $locationTitle; ?></option>
+                        <?php }?>                    
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Story Category</label>
+                    <select name="category" class="form-select" aria-label="Default select example">
+                        <option value="<?php echo htmlentities($getStoryCategory)?>"><?php echo htmlentities($getStoryCategory)?></option>
+                        <?php
+                        //Fetchinng all the categories from category table
+                        global $connectingDB;
+                        $sql = "SELECT id,title FROM categories ORDER BY title";
+                        $stmt = $connectingDB->query($sql);
+                        while ($DataRows = $stmt->fetch()) {
+                        $id = $DataRows["id"];
+                        $categoryTitle = $DataRows["title"];
+                        ?>
+                        <option value="<?php echo $categoryTitle; ?>"> <?php echo $categoryTitle; ?></option>
+                        <?php }?>
+                        
+                    </select>
                 </div>
                 <div class="mb-3">
                     <label for="formFile" class="form-label">Photo</label>

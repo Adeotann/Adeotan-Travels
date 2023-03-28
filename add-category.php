@@ -4,6 +4,8 @@ require_once("inc/db/db_connection.php");
 require_once("inc/sessions/sessions.php");
 require_once("inc/functions/functions.php");
 
+$pageTitle = 'Add Category';
+
 $_SESSION["TrackingURL"]=$_SERVER["PHP_SELF"];
 confirmLogin(); 
 
@@ -59,7 +61,8 @@ if(isset($_POST["submit"])){
     <!-- Main content -->
     <div class="container give-min-height">
         <div class="mt-5 mb-5 text-center">
-            <a href="admin-dashboard.php" class="btn btn-warning" role="button">Admin Dashboard</a>                        
+            <a href="admin-dashboard.php" class="btn btn-warning" role="button">Admin Dashboard</a> 
+            <a href="view-categories.php" class="btn btn-dark" role="button">View Categories</a>                        
         </div>     
         <div class="mt-5 mb-5 text-center">
             <h3>Add Category</h3>

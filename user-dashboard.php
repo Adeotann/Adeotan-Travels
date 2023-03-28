@@ -4,6 +4,8 @@ require_once("inc/db/db_connection.php");
 require_once("inc/sessions/sessions.php");
 require_once("inc/functions/functions.php");
 
+$pageTitle = 'User Dashboard';
+
 $_SESSION["TrackingURL"]=$_SERVER["PHP_SELF"];
 confirmLogin(); 
 
@@ -25,7 +27,7 @@ $userId = $_SESSION["userId"];
             <a href="my-stories.php" class="btn btn-warning" role="button">My Stories</a>                        
         </div>
         <div class="mt-5 mb-5 text-center">
-            <h3>You have 3 Stories</h3>
+            <h3>You have <?php myTotalUserStories($userId)?> Stories</h3>
         </div>
          <!-- User Stories -->        
         <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -37,10 +39,12 @@ $userId = $_SESSION["userId"];
                     $storyId        = $DataRows["id"];
                     $storyTitle  = $DataRows["title"];
                     $storyLocation = $DataRows["location"];
+                    $storyCategory = $DataRows["category"];
                     $storyImage  = $DataRows["image"];
                     $storyDesc     = $DataRows["description"];
                     $storyAuthor     = $DataRows["author"];
-                    $isApproved     = $DataRows["is_approved"];                
+                    $isApproved     = $DataRows["is_approved"];
+                    $created_at     = $DataRows["created_at"];                
                     
             ?>
             <div class="col">
@@ -49,7 +53,12 @@ $userId = $_SESSION["userId"];
                 <div class="card-body">
                     <h5 class="card-title"><?php echo htmlentities($storyTitle)?></h5>
                     <p><b>Location:</b> <?php echo htmlentities($storyLocation)?></p>
-                    <p class="card-text"><?php echo htmlentities($storyDesc)?></p>
+                    <p><b>Category:</b> <?php echo htmlentities($storyCategory)?></p>
+
+                    <p class="card-text"><?php if(strlen($storyDesc)>35){$storyDesc = substr($storyDesc,0,35).'...';}
+                        echo htmlentities($storyDesc) ;?>
+                    </p>
+
                     <a href="my-story-details.php?id=<?php echo $storyId ;?>" class="stretched-link"></a>
                     <!-- Approved Notification -->
                     <?php if($isApproved ==1){?>
@@ -58,6 +67,7 @@ $userId = $_SESSION["userId"];
                         <button type="button" class="btn btn-sm btn-secondary" disabled>Unapproved</button>
                     <?php }?>
                     <!-- Approved Notification -->
+                    <p><b>Posted By:</b> <?php echo htmlentities($storyAuthor)?>, on <?php echo htmlentities($created_at)?></p>
                 </div>
                 </div>
             </div>

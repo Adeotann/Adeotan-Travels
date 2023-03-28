@@ -4,6 +4,8 @@ require_once("inc/db/db_connection.php");
 require_once("inc/sessions/sessions.php");
 require_once("inc/functions/functions.php");
 
+$pageTitle = 'Adeotan Travels';
+
 ?>
 
 <!-- Header Section -->
@@ -59,7 +61,8 @@ require_once("inc/functions/functions.php");
                     $storyCategory = $DataRows["category"];
                     $storyImage  = $DataRows["image"];
                     $storyDesc     = $DataRows["description"];
-                    $storyAuthor     = $DataRows["author"];                
+                    $storyAuthor     = $DataRows["author"];
+                    $created_at     = $DataRows["created_at"];             
                     
             ?>
             <div class="col">
@@ -69,8 +72,13 @@ require_once("inc/functions/functions.php");
                     <h5 class="card-title"><?php echo htmlentities($storyTitle)?></h5>
                     <p><b>Location:</b> <?php echo htmlentities($storyLocation)?></p>
                     <p><b>Category:</b> <?php echo htmlentities($storyCategory)?></p>
-                    <p class="card-text"><?php echo htmlentities($storyDesc)?></p>                    
-                    <a href="story-details.php?id=<?php echo $storyId ;?>" class="stretched-link"></a>                    
+
+                    <p class="card-text"><?php if(strlen($storyDesc)>35){$storyDesc = substr($storyDesc,0,35).'...';}
+                        echo htmlentities($storyDesc) ;?>
+                    </p>
+
+                    <a href="story-details.php?id=<?php echo $storyId ;?>" class="stretched-link"></a> 
+                    <p><b>Posted By:</b> <?php echo htmlentities($storyAuthor)?>, on <?php echo htmlentities($created_at)?></p>                   
                 </div>
                 </div>
             </div>

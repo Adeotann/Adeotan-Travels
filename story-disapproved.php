@@ -19,7 +19,7 @@ if(isset($_GET["id"])){
   $sql = "UPDATE stories SET is_approved = 0 WHERE id = '$queryParameter' ";
   $execute = $connectingDB->query($sql);
   if ($execute) {
-    $_SESSION["successMessage"]="Story Deleted Successfully ! ";
+    $_SESSION["successMessage"]="Story Disapproved !! ";
     redirectTo("approve-stories.php");
     // code...
   }else {
